@@ -1,30 +1,22 @@
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-        if (s.size() != t.size()) return false;
+        return encode(s) == encode(t);
+    }
 
-        unordered_map<char, char> map_s_to_t;
-        unordered_map<char, char> map_t_to_s;
+private:
+    vector<int> encode(const string& str) {
+        unordered_map<char, int> mp;
+        vector<int> res;
+        int index = 0;
 
-        for (int i = 0; i < s.size(); i++) {
-            char cs = s[i];
-            char ct = t[i];
-
-            // Check if there's already a mapping from s to t
-            if (map_s_to_t.count(cs)) {
-                if (map_s_to_t[cs] != ct) return false; // inconsistent mapping
-            } else {
-                map_s_to_t[cs] = ct;
+        for (char ch : str) {
+            if (!mp.count(ch)) {
+                mp[ch] = index++;
             }
-
-            // Check reverse mapping from t to s to ensure one-to-one
-            if (map_t_to_s.count(ct)) {
-                if (map_t_to_s[ct] != cs) return false;
-            } else {
-                map_t_to_s[ct] = cs;
-            }
+            res.push_back(mp[ch]);
         }
 
-        return true;
+        return res;
     }
 };
