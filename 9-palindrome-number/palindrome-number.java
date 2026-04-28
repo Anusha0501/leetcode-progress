@@ -1,23 +1,23 @@
 class Solution {
     public boolean isPalindrome(int x) {
-        if (x < 0) return false;  // handle negative numbers
+        if (x < 0) return false;
 
-        if (x == Palindrome(x)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+        char[] arr = String.valueOf(x).toCharArray();
 
-    private int Palindrome(int x) {
-        int reverse = 0;
+        int i = 0, j = arr.length - 1;
 
-        while (x != 0) {
-            int p = x % 10;              // last digit
-            reverse = reverse * 10 + p;  // build reverse
-            x = x / 10;                  // reduce number
+        while (i < j) {
+            // swap using temp
+            char temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+
+            i++;
+            j--;
         }
 
-        return reverse;
+        String reversed = new String(arr);
+
+        return String.valueOf(x).equals(reversed);
     }
 }
