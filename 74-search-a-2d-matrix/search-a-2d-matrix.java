@@ -4,13 +4,26 @@ class Solution {
         int n = matrix.length;
         int m = matrix[0].length;
 
-        for (int i = 0; i < n; i++) {
+        int low = 0;
+        int high = n * m - 1;
 
-            for (int j = 0; j < m; j++) {
+        while (low <= high) {
 
-                if (matrix[i][j] == target) {
-                    return true;
-                }
+            int mid = low + (high - low) / 2;
+
+            int row = mid / m;
+            int col = mid % m;
+
+            if (matrix[row][col] == target) {
+                return true;
+            }
+
+            else if (matrix[row][col] < target) {
+                low = mid + 1;
+            }
+
+            else {
+                high = mid - 1;
             }
         }
 
