@@ -1,26 +1,31 @@
 class Solution {
+
     public double myPow(double x, int n) {
 
         long N = n;
-        
+
         if(N < 0){
             x = 1 / x;
             N = -N;
         }
 
-        double ans = 1.0;
+        return power(x, N);
+    }
 
-        while(N > 0){
+    public double power(double x, long n){
 
-            if((N & 1) != 0){
-                ans = ans * x;
-            }
-
-            x = x * x;
-
-            N = N >> 1;
+        if(n == 0){
+            return 1.0;
         }
 
-        return ans;
+        double half = power(x, n / 2);
+
+        double result = half * half;
+
+        if(n % 2 != 0){
+            result *= x;
+        }
+
+        return result;
     }
 }
